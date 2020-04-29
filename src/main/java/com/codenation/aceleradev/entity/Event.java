@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -31,23 +32,24 @@ public class Event {
     private Long id;
 
     @Column
-    @NotNull
+    @NotNull(message = "Level information not found!")
     private Level level;
 
     @Column
-    @NotNull
+    @NotNull(message = "Description information not found!")
     private String description;
 
     @Column
-    @NotNull
+    @NotNull(message = "Log information not found!")
     private String log;
 
     @Column
-    @NotNull
+    @NotNull(message = "Source information not found!")
     private String source;
 
     @Column
-    @NotNull
+    @NotNull(message = "Quantity information not found!")
+    @Min(value = 1, message = "Minimum quantity is 1!")
     private Long quantity;
 
     @Column

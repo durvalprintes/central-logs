@@ -1,0 +1,3 @@
+INSERT INTO users(name, email, password, created_at) VALUES ('Durval do Vale Printes', 'durvalprintes@gmail.com', 'Printes', now());
+INSERT INTO events(level, description, log, source, quantity, created_at) VALUES (0, 'ERROR 1', '2224L34K3J4KL3J24KL', 'SISTEMA 1', 1, now());
+INSERT INTO events(level, description, log, source, quantity, created_at) VALUES (1, 'INFO 1', 'RRCKIORRMVDVJKKFJKLTMNTM', 'SISTEMA 2', 1, now());

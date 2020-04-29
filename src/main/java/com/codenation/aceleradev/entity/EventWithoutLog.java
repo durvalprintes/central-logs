@@ -2,7 +2,7 @@ package com.codenation.aceleradev.entity;
 
 import java.time.LocalDateTime;
 
-public interface EventView {
+public interface EventWithoutLog {
 
     Long getId();
 

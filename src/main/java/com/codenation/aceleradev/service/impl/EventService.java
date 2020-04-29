@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.util.Optional;
 
 import com.codenation.aceleradev.entity.Event;
-import com.codenation.aceleradev.entity.EventView;
+import com.codenation.aceleradev.entity.EventWithoutLog;
 import com.codenation.aceleradev.entity.Level;
 import com.codenation.aceleradev.repository.EventRepository;
 import com.codenation.aceleradev.service.interfaces.EventServiceInterface;
@@ -41,35 +41,43 @@ public class EventService implements EventServiceInterface {
         String[] fields = sortFields.split(",");
         Sort sorted = orderField(fields[0]);
         for (int i = 1; i < fields.length; i++) {
-            sorted = sorted.and(orderField(fields[0]));
+            sorted = sorted.and(orderField(fields[i]));
         }
         return PageRequest.of(pageNumber, pageSize, sorted);
     }
 
+    public Page<EventWithoutLog> findAll(Integer pageNumber, Integer pageSize, String sortFields) {
+        return repository.findAllEvents(sortPage(pageNumber, pageSize, sortFields));
+    }
+
     @Override
-    public Page<EventView> findByLevel(Level eventLevel, Integer pageNumber, Integer pageSize, String sortFields) {
+    public Page<EventWithoutLog> findByLevel(Level eventLevel, Integer pageNumber, Integer pageSize,
+            String sortFields) {
         return repository.findByLevel(eventLevel, sortPage(pageNumber, pageSize, sortFields));
     }
 
     @Override
-    public Page<EventView> findByDescription(String eventDescription, Integer pageNumber, Integer pageSize,
+    public Page<EventWithoutLog> findByDescription(String eventDescription, Integer pageNumber, Integer pageSize,
             String sortFields) {
         return repository.findByDescription(eventDescription, sortPage(pageNumber, pageSize, sortFields));
     }
 
     @Override
-    public Page<EventView> findBySource(String eventSource, Integer pageNumber, Integer pageSize, String sortFields) {
+    public Page<EventWithoutLog> findBySource(String eventSource, Integer pageNumber, Integer pageSize,
+            String sortFields) {
         return repository.findBySource(eventSource, sortPage(pageNumber, pageSize, sortFields));
     }
 
     @Override
-    public Page<EventView> findByDate(LocalDate eventDate, Integer pageNumber, Integer pageSize, String sortFields) {
+    public Page<EventWithoutLog> findByDate(LocalDate eventDate, Integer pageNumber, Integer pageSize,
+            String sortFields) {
         return repository.findByCreatedAtBetween(eventDate.atTime(LocalTime.MIN), eventDate.atTime(LocalTime.MAX),
                 sortPage(pageNumber, pageSize, sortFields));
     }
 
     @Override
-    public Page<EventView> findByQuantity(Long eventQuantity, Integer pageNumber, Integer pageSize, String sortFields) {
+    public Page<EventWithoutLog> findByQuantity(Long eventQuantity, Integer pageNumber, Integer pageSize,
+            String sortFields) {
         return repository.findByQuantity(eventQuantity, sortPage(pageNumber, pageSize, sortFields));
     }
 
