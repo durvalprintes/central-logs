@@ -27,6 +27,6 @@ public interface EventRepository extends PagingAndSortingRepository<Event, Long>
     Page<EventWithoutLog> findByCreatedAtBetween(LocalDateTime eventDateStart, LocalDateTime eventDateEnd,
             Pageable pageable);
 
-    Page<EventWithoutLog> findByQuantity(Long eventQuantity, Pageable pageable);
+    Page<EventWithoutLog> findByQuantity(Integer eventQuantity, Pageable pageable);
 
 }

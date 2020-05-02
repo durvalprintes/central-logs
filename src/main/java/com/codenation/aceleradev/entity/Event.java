@@ -1,16 +1,23 @@
 package com.codenation.aceleradev.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -25,6 +32,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Table(name = "events")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Event {
 
     @Id
@@ -40,20 +48,18 @@ public class Event {
     private String description;
 
     @Column
-    @NotNull(message = "Log information not found!")
-    private String log;
-
-    @Column
     @NotNull(message = "Source information not found!")
     private String source;
 
     @Column
-    @NotNull(message = "Quantity information not found!")
-    @Min(value = 1, message = "Minimum quantity is 1!")
-    private Long quantity;
+    private Integer quantity;
 
     @Column
     @CreatedDate
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Log> logs;
 
 }

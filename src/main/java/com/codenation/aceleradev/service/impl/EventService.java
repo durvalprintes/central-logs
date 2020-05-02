@@ -12,9 +12,7 @@ import com.codenation.aceleradev.service.interfaces.EventServiceInterface;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,6 +22,7 @@ public class EventService implements EventServiceInterface {
     private EventRepository repository;
 
     public Event save(Event event) {
+        event.setQuantity(event.getLogs().size());
         return repository.save(event);
     }
 
@@ -32,53 +31,34 @@ public class EventService implements EventServiceInterface {
         return repository.findById(eventId);
     }
 
-    private Sort orderField(String field) {
-        return field.contains("DESC") ? Sort.by(field.replace("DESC", "").replace("ASC", "")).descending()
-                : Sort.by(field.replace("DESC", "").replace("ASC", "")).ascending();
-    }
-
-    private Pageable sortPage(Integer pageNumber, Integer pageSize, String sortFields) {
-        String[] fields = sortFields.split(",");
-        Sort sorted = orderField(fields[0]);
-        for (int i = 1; i < fields.length; i++) {
-            sorted = sorted.and(orderField(fields[i]));
-        }
-        return PageRequest.of(pageNumber, pageSize, sorted);
-    }
-
-    public Page<EventWithoutLog> findAll(Integer pageNumber, Integer pageSize, String sortFields) {
-        return repository.findAllEvents(sortPage(pageNumber, pageSize, sortFields));
+    public Page<EventWithoutLog> findAll(Pageable pageable) {
+        return repository.findAllEvents(pageable);
     }
 
     @Override
-    public Page<EventWithoutLog> findByLevel(Level eventLevel, Integer pageNumber, Integer pageSize,
-            String sortFields) {
-        return repository.findByLevel(eventLevel, sortPage(pageNumber, pageSize, sortFields));
+    public Page<EventWithoutLog> findByLevel(Level eventLevel, Pageable pageable) {
+        return repository.findByLevel(eventLevel, pageable);
     }
 
     @Override
-    public Page<EventWithoutLog> findByDescription(String eventDescription, Integer pageNumber, Integer pageSize,
-            String sortFields) {
-        return repository.findByDescription(eventDescription, sortPage(pageNumber, pageSize, sortFields));
+    public Page<EventWithoutLog> findByDescription(String eventDescription, Pageable pageable) {
+        return repository.findByDescription(eventDescription, pageable);
     }
 
     @Override
-    public Page<EventWithoutLog> findBySource(String eventSource, Integer pageNumber, Integer pageSize,
-            String sortFields) {
-        return repository.findBySource(eventSource, sortPage(pageNumber, pageSize, sortFields));
+    public Page<EventWithoutLog> findBySource(String eventSource, Pageable pageable) {
+        return repository.findBySource(eventSource, pageable);
     }
 
     @Override
-    public Page<EventWithoutLog> findByDate(LocalDate eventDate, Integer pageNumber, Integer pageSize,
-            String sortFields) {
+    public Page<EventWithoutLog> findByDate(LocalDate eventDate, Pageable pageable) {
         return repository.findByCreatedAtBetween(eventDate.atTime(LocalTime.MIN), eventDate.atTime(LocalTime.MAX),
-                sortPage(pageNumber, pageSize, sortFields));
+                pageable);
     }
 
     @Override
-    public Page<EventWithoutLog> findByQuantity(Long eventQuantity, Integer pageNumber, Integer pageSize,
-            String sortFields) {
-        return repository.findByQuantity(eventQuantity, sortPage(pageNumber, pageSize, sortFields));
+    public Page<EventWithoutLog> findByQuantity(Integer eventQuantity, Pageable pageable) {
+        return repository.findByQuantity(eventQuantity, pageable);
     }
 
 }
