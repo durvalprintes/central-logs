@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import com.codenation.aceleradev.entity.Event;
 import com.codenation.aceleradev.entity.EventWithoutLog;
-import com.codenation.aceleradev.entity.Level;
+import com.codenation.aceleradev.validator.Level;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

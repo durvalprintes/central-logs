@@ -7,14 +7,21 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
+import com.codenation.aceleradev.validator.Level;
+import com.codenation.aceleradev.validator.NotLevel;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -40,15 +47,17 @@ public class Event {
     private Long id;
 
     @Column
-    @NotNull(message = "Level information not found!")
+    @NotNull(message = "Not found!")
+    @Enumerated(EnumType.STRING)
+    @NotLevel(anyOf = { Level.ERROR, Level.INFO, Level.WARNING })
     private Level level;
 
     @Column
-    @NotNull(message = "Description information not found!")
+    @NotEmpty(message = "Not found or is empty!")
     private String description;
 
     @Column
-    @NotNull(message = "Source information not found!")
+    @NotEmpty(message = "Not found or is empty!")
     private String source;
 
     @Column
@@ -58,8 +67,9 @@ public class Event {
     @CreatedDate
     private LocalDateTime createdAt;
 
+    @NotEmpty(message = "Not found or is empty!")
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
     @JsonManagedReference
-    private List<Log> logs;
+    private List<@Valid Log> logs;
 
 }

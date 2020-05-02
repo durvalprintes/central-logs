@@ -6,9 +6,9 @@ import java.util.Optional;
 
 import com.codenation.aceleradev.entity.Event;
 import com.codenation.aceleradev.entity.EventWithoutLog;
-import com.codenation.aceleradev.entity.Level;
 import com.codenation.aceleradev.repository.EventRepository;
 import com.codenation.aceleradev.service.interfaces.EventServiceInterface;
+import com.codenation.aceleradev.validator.Level;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

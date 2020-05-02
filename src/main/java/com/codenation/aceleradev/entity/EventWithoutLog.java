@@ -2,6 +2,8 @@ package com.codenation.aceleradev.entity;
 
 import java.time.LocalDateTime;
 
+import com.codenation.aceleradev.validator.Level;
+
 public interface EventWithoutLog {
 
     Long getId();

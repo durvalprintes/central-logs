@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -32,7 +32,7 @@ public class Log implements Serializable {
     private Long id;
 
     @Column
-    @NotNull(message = "Log information not found!")
+    @NotEmpty(message = "Not found or is empty!")
     private String log;
 
     @ManyToOne(optional = false)

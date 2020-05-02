@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.codenation.aceleradev.entity.Event;
 import com.codenation.aceleradev.entity.EventWithoutLog;
-import com.codenation.aceleradev.entity.Level;
+import com.codenation.aceleradev.validator.Level;
 
 import org.springframework.data.domain.Pageable;
 
