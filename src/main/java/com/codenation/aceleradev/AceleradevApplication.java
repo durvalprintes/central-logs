@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
@@ -21,12 +23,15 @@ public class AceleradevApplication {
         SpringApplication.run(AceleradevApplication.class, args);
     }
 
+    @Api(value = "Docs", description = "API Launched and Documentation avaliable")
     @RestController
-    @RequestMapping(path = "/api")
-    class Main {
+    @RequestMapping(path = "/")
+    class Docs {
+
+        @ApiOperation(value = "Link to Documentation API")
         @GetMapping
-        public Map<String, String> root() {
-            return Collections.singletonMap("Docs:", "https://log-center.herokuapp.com/swagger-ui.html");
+        public Map<String, String> docs() {
+            return Collections.singletonMap("Docs", "https://log-center.herokuapp.com/swagger-ui.html");
         }
 
     }
