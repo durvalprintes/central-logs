@@ -8,7 +8,6 @@ import com.codenation.aceleradev.entity.Event;
 import com.codenation.aceleradev.entity.EventWithoutLog;
 import com.codenation.aceleradev.repository.EventRepository;
 import com.codenation.aceleradev.service.interfaces.EventServiceInterface;
-import com.codenation.aceleradev.validator.Level;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,7 +35,7 @@ public class EventService implements EventServiceInterface {
     }
 
     @Override
-    public Page<EventWithoutLog> findByLevel(Level eventLevel, Pageable pageable) {
+    public Page<EventWithoutLog> findByLevel(String eventLevel, Pageable pageable) {
         return repository.findByLevel(eventLevel, pageable);
     }
 

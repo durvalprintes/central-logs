@@ -9,7 +9,6 @@ import com.codenation.aceleradev.entity.Event;
 import com.codenation.aceleradev.entity.EventWithoutLog;
 import com.codenation.aceleradev.exception.ResourceNotFoundException;
 import com.codenation.aceleradev.service.impl.EventService;
-import com.codenation.aceleradev.validator.Level;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -33,12 +32,13 @@ public class EventController {
 
     @GetMapping("/{eventId}")
     @ResponseStatus(HttpStatus.OK)
-    public Event findById(@PathVariable("eventId") Long eventId) {
-        return service.findById(eventId).orElseThrow(() -> new ResourceNotFoundException("Evento"));
+    public Event findById(@PathVariable("eventId") Long eventId) throws ResourceNotFoundException {
+        return service.findById(eventId)
+                .orElseThrow(() -> new ResourceNotFoundException("Event with id " + eventId + " not found!"));
     }
 
     @GetMapping
-    public Iterable<EventWithoutLog> findAll(@RequestParam(name = "level") Optional<Level> eventLevel,
+    public Iterable<EventWithoutLog> findAll(@RequestParam(name = "level") Optional<String> eventLevel,
             @RequestParam(name = "description") Optional<String> eventDescription,
             @RequestParam(name = "source") Optional<String> eventSource,
             @RequestParam(name = "date") @DateTimeFormat(pattern = "dd-MM-yyyy") Optional<LocalDate> eventDate,

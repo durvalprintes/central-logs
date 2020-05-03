@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import com.codenation.aceleradev.entity.Event;
 import com.codenation.aceleradev.entity.EventWithoutLog;
-import com.codenation.aceleradev.validator.Level;
 
 import org.springframework.data.domain.Pageable;
 
@@ -13,7 +12,7 @@ public interface EventServiceInterface {
 
     Optional<Event> findById(Long eventId);
 
-    Iterable<EventWithoutLog> findByLevel(Level eventLevel, Pageable pageable);
+    Iterable<EventWithoutLog> findByLevel(String eventLevel, Pageable pageable);
 
     Iterable<EventWithoutLog> findByDescription(String eventDescription, Pageable pageable);
 

@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 import com.codenation.aceleradev.entity.Event;
 import com.codenation.aceleradev.entity.EventWithoutLog;
-import com.codenation.aceleradev.validator.Level;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,7 +17,7 @@ public interface EventRepository extends PagingAndSortingRepository<Event, Long>
     @Query("select e from Event e")
     Page<EventWithoutLog> findAllEvents(Pageable pageable);
 
-    Page<EventWithoutLog> findByLevel(Level eventLevel, Pageable pageable);
+    Page<EventWithoutLog> findByLevel(String eventLevel, Pageable pageable);
 
     Page<EventWithoutLog> findByDescription(String eventDescription, Pageable pageable);
 

@@ -2,8 +2,8 @@ package com.codenation.aceleradev.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
 
-    public ResourceNotFoundException(String resourceName) {
-        super("Resource: " + resourceName + " not found");
+    public ResourceNotFoundException(String exception) {
+        super(exception);
     }
 
 }
