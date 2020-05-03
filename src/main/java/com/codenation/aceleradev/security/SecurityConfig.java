@@ -17,7 +17,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @EnableWebSecurity
 @EnableAuthorizationServer
 @EnableResourceServer
-public class Config extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserService userService;
@@ -30,7 +30,7 @@ public class Config extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/api", "/v2/**", "/webjars/**", "/configuration/**", "/swagger-resources/**",
+        web.ignoring().antMatchers("/v2/**", "/webjars/**", "/configuration/**", "/swagger-resources/**",
                 "/swagger-ui.html");
     }
 

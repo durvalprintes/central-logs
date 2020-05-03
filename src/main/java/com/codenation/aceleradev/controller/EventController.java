@@ -23,6 +23,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+
+@Api(value = "Events Management", description = "Operations to event")
 @RestController
 @RequestMapping(path = "/api/event")
 public class EventController {
@@ -30,14 +36,19 @@ public class EventController {
     @Autowired
     private EventService service;
 
+    @ApiOperation(value = "Get a specific Event with Logs by ID", response = Event.class)
+    @ApiResponse(code = 404, message = "Event not found")
     @GetMapping("/{eventId}")
     @ResponseStatus(HttpStatus.OK)
-    public Event findById(@PathVariable("eventId") Long eventId) throws ResourceNotFoundException {
+    public Event findById(
+            @ApiParam(value = "ID from which Event object will retrieve", required = true, example = "123") @PathVariable("eventId") Long eventId)
+            throws ResourceNotFoundException {
         return service.findById(eventId)
                 .orElseThrow(() -> new ResourceNotFoundException("Event with id " + eventId + " not found!"));
     }
 
     @GetMapping
+    @ApiOperation(value = "Get a list of Events without Logs info", response = EventWithoutLog.class)
     public Iterable<EventWithoutLog> findAll(@RequestParam(name = "level") Optional<String> eventLevel,
             @RequestParam(name = "description") Optional<String> eventDescription,
             @RequestParam(name = "source") Optional<String> eventSource,
@@ -56,9 +67,11 @@ public class EventController {
         return service.findAll(pageable);
     }
 
+    @ApiOperation(value = "Add an Event with Logs")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void save(@Valid @RequestBody Event event) {
+    public void save(
+            @ApiParam(value = "Event and Logs objects to be added to the database", required = true) @Valid @RequestBody Event event) {
         service.save(event);
     }
 

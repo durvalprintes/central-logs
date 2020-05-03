@@ -1,6 +1,6 @@
 package com.codenation.aceleradev.validator;
 
-public enum Level {
+public enum LevelEnum {
 
     ERROR, WARNING, INFO;
 
