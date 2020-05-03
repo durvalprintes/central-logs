@@ -20,8 +20,6 @@ import javax.validation.constraints.NotNull;
 import com.codenation.aceleradev.validator.LevelEnum;
 import com.codenation.aceleradev.validator.NotEnum;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;

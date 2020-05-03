@@ -22,9 +22,9 @@ public class SwaggerConfig {
     }
 
     private ApiInfo metaData() {
-        return new ApiInfoBuilder().title("Logs Center").description("Systems and Services Log Event Management API")
+        return new ApiInfoBuilder().title("Log Center").description("Systems and Services Log Event Management API")
                 .contact(new Contact("Durval Printes", "https://www.linkedin.com/in/durval-printes-51880359/",
-                        "durvalrpintes@gmail.com"))
+                        "durvalprintes@gmail.com"))
                 .version("1.0.0").license("Apache License Version 2.0")
                 .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0").build();
     }

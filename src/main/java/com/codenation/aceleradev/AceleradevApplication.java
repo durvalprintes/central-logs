@@ -15,14 +15,4 @@ public class AceleradevApplication {
         SpringApplication.run(AceleradevApplication.class, args);
     }
 
-    /*
-     * @RestController
-     * 
-     * @RequestMapping(path = "/api") class Main {
-     * 
-     * @GetMapping public Map<String, String> root() { return
-     * Collections.singletonMap("API", "OK"); }
-     * 
-     * }
-     */
 }
