@@ -22,7 +22,7 @@ public class SwaggerConfig {
     }
 
     private ApiInfo metaData() {
-        return new ApiInfoBuilder().title("Log Center").description("Systems and Services Log Event Management API")
+        return new ApiInfoBuilder().title("Log Center").description("Log Event Management API")
                 .contact(new Contact("Durval Printes", "https://www.linkedin.com/in/durval-printes-51880359/",
                         "durvalprintes@gmail.com"))
                 .version("1.0.0").license("Apache License Version 2.0")
